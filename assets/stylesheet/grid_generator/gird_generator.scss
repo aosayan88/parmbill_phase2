@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #c4c4c4;
+    padding: 13px 22px;
+
+    h1 {
+        font: 24px/24px "Public Sans";
+        font-weight: 400;
+    }
+}
+
+#content_container {
+    padding: 30px 20px;
+
+    #tiles_table {
+        margin-bottom: 20px;
+
+        .tile div {
+            border-radius: 10px;
+            display: inline-block;
+            height: 100px;
+            margin: 5px;
+            width: 100px;
+        }
+    
+        .empty {
+            background-color: #e0e0e0;  
+        }
+    
+        .tilled {
+            background-color: #219653;
+        }
+    }
+    
+    button {
+        background: #2f80ed;
+        border-radius: 5px;
+        border: none;
+        color: #fff;
+        display: block;
+        font-weight: 400;
+        font: 24px/24px "Public Sans";
+        height: 40px;
+        width: 210px;
+        margin: 20px 0;
+    }
+
+    .coordinates_textarea {
+        height: 150px;
+        width: 210px;
+    }
+}
