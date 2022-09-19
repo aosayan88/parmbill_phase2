@@ -14,12 +14,10 @@ $(document).ready(function () {
         .on("click", ".has_plant", showTilePopover)                                 /** This function will show popups */
         .on("click", ".till_btn", setTilledState)                                   /** This function will set the tile in tilled state */
         .on("click", ".plant_btn", openCropToPlantModal)                            /** This function will open crop to plant modal */
-        //.on("dblclick", ".has_plant", setHarvestState)                              /** This function will set the tile in harvest state */
         .on("click", ".crop_to_plant_btn",submitSelectedCrop)
         .on("click", ".remove_btn", openRemoveModal)                                /** This function will open remove modal */
         .on("click", ".harvest_btn", harvestTile)                                   /** This function will harvest the plant and will add the crop value to total earnings */
         .on("click", ".remove_modal_remove_btn", removePlantState)                  /** This function will remove any state then set the tile to empty */
-        .on("click", ".tile_radio_btn", selectCropToPlant)
         .on("click", hidePopover);                                                  /** This function will hide other popovers in page */
     
     $('[data-toggle="popover"]').popover({
@@ -29,41 +27,13 @@ $(document).ready(function () {
     });
 });
 
-function selectCropToPlant(){
-    let crop_plant_tile = $(this)[0];
-    selected_plant = crop_plant_tile.id.split("_")[0];
-}
-
 function submitSelectedCrop(){
     let tile_index = tile_id.split("id_")[1];
+    selected_plant = $("input[name='crop_option']:checked").val();
     let plant = new Plant(selected_plant);
     let this_tile = tiles[tile_index];
     
-    
-    if(selected_plant === "potato") {
-        plant.setHarvestTime(5);
-        plant.setValue(10)
-        plant.setHarvestValue(15);
-        plant.setCropImage("url('/assets/images/potato_icon.svg') no-repeat center 10px / 70px");
-    }
-    if(selected_plant === "onion") {
-        plant.setHarvestTime(8);
-        plant.setValue(15)
-        plant.setHarvestValue(25);
-        plant.setCropImage("url('/assets/images/onion_icon.svg') no-repeat center 10px / 50px");
-    }
-    if(selected_plant === "carrot") {
-        plant.setHarvestTime(10);
-        plant.setValue(25)
-        plant.setHarvestValue(75);
-        plant.setCropImage("url('/assets/images/carrot_icon.svg') no-repeat center 10px / 22px");
-    }
-    if(selected_plant === "corn") {
-        plant.setHarvestTime(12);
-        plant.setValue(35)
-        plant.setHarvestValue(100);
-        plant.setCropImage("url('/assets/images/corn_icon.svg') no-repeat center 10px / 43px");
-    }
+    selectedCropsValues(plant);
     
     this_tile.setTileStatus('has_plant');
     this_tile.setPlant(plant);
@@ -83,6 +53,36 @@ function submitSelectedCrop(){
         let time = this_tile.plant['harvest_time'];
         tile.removeClass("tilled").addClass("has_plant").addClass(`${this_tile.plant['crop']}_planted`).find(".tile_text").text(`${time}s`);
         harvestTime(time, tile_id, this_tile);
+    }
+}
+
+/** 
+    * DOCU: This function will show popups <br>
+    * Triggered By: .on("click", ".empty", showPopover) <br>
+    * Last Updated Date: Sept. 8, 2022
+    * @function
+    * @author Alfie Osayan
+*/
+function selectedCropsValues(plant){
+    if(selected_plant === "potato") {
+        plant.setHarvestTime(5);
+        plant.setValue(10)
+        plant.setHarvestValue(15);
+    }
+    if(selected_plant === "onion") {
+        plant.setHarvestTime(8);
+        plant.setValue(15)
+        plant.setHarvestValue(25);
+    }
+    if(selected_plant === "carrot") {
+        plant.setHarvestTime(10);
+        plant.setValue(25)
+        plant.setHarvestValue(75);
+    }
+    if(selected_plant === "corn") {
+        plant.setHarvestTime(12);
+        plant.setValue(35)
+        plant.setHarvestValue(100);
     }
 }
 
@@ -201,7 +201,6 @@ function harvestTile(){
 function removePlantState(){
     let tile = $(`#${tile_id}`);
     let selected_tile = tile_id.split("id_")[1];
-    console.log(tiles[selected_tile]);
     tiles[selected_tile].setTileStatus("empty");
     tiles[selected_tile].setPlant({});
     tile.removeClass().addClass("empty").find(".tile_text").text("");
