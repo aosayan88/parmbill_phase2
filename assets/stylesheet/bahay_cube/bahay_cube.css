@@ -37,17 +37,25 @@ header {
           color: #fff;
           display: inline-block;
           font: 14px/14px "Public Sans";
-          font-weight: 400; }
+          font-weight: 400;
+          margin-top: 10px; }
       #content_container #tiles_container #tiles_table .empty {
-        background-color: #828282; }
+        background-color: #828282 !important;
+        background: none; }
       #content_container #tiles_container #tiles_table .tilled {
-        background-color: #f2994a; }
+        background-color: #f2994a !important; }
       #content_container #tiles_container #tiles_table .has_plant {
-        background: url("/assets/images/potato_icon.svg") no-repeat center 5px/70px;
-        background-color: #f2c94c; }
+        background-color: #f2c94c !important; }
       #content_container #tiles_container #tiles_table .harvest {
-        background: url("/assets/images/potato_icon.svg") no-repeat center 5px/70px;
-        background-color: #219653; }
+        background-color: #219653 !important; }
+      #content_container #tiles_container #tiles_table .potato_planted {
+        background: url("/assets/images/potato_icon.svg") no-repeat center 10px/70px; }
+      #content_container #tiles_container #tiles_table .onion_planted {
+        background: url("/assets/images/onion_icon.svg") no-repeat center 10px/50px; }
+      #content_container #tiles_container #tiles_table .carrot_planted {
+        background: url("/assets/images/carrot_icon.svg") no-repeat center 10px/22px; }
+      #content_container #tiles_container #tiles_table .corn_planted {
+        background: url("/assets/images/corn_icon.svg") no-repeat center 10px/43px; }
     #content_container #tiles_container .total_earnings {
       font: 20px/16px "Public Sans";
       font-weight: 700; }
@@ -95,31 +103,38 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between; }
-  .crop_plant_modal_body .crop_plant_content .crop_tile button {
-    background-color: #E0E0E0;
+  .crop_plant_modal_body .crop_plant_content input[type="radio"] {
+    display: none; }
+    .crop_plant_modal_body .crop_plant_content input[type="radio"]:checked + .tile_radio_btn {
+      background-color: #f2c94c !important; }
+  .crop_plant_modal_body .crop_plant_content .tile_radio_btn {
+    align-items: center;
+    background-color: #E0E0E0 !important;
     border: none;
     border-radius: 10px;
-    display: inline-block;
+    display: flex;
     height: 100px;
     outline: none;
     padding-top: 50px;
     width: 100px; }
-    .crop_plant_modal_body .crop_plant_content .crop_tile button .tile_text {
+    .crop_plant_modal_body .crop_plant_content .tile_radio_btn#potato_crop {
+      background: url("/assets/images/potato_icon.svg") no-repeat center 10px/70px; }
+    .crop_plant_modal_body .crop_plant_content .tile_radio_btn#onion_crop {
+      background: url("/assets/images/onion_icon.svg") no-repeat center 10px/50px; }
+    .crop_plant_modal_body .crop_plant_content .tile_radio_btn#carrot_crop {
+      background: url("/assets/images/carrot_icon.svg") no-repeat center 10px/22px; }
+    .crop_plant_modal_body .crop_plant_content .tile_radio_btn#corn_crop {
+      background: url("/assets/images/corn_icon.svg") no-repeat center 10px/43px; }
+    .crop_plant_modal_body .crop_plant_content .tile_radio_btn .tile_text {
       color: #333333;
       display: inline-block;
       font: 12px/12px "Public Sans";
       font-weight: 400;
-      margin-top: 20px; }
-  .crop_plant_modal_body .crop_plant_content button {
-    margin-top: 20px; }
-  .crop_plant_modal_body .crop_plant_content .potato_crop_tile {
-    background: url("/assets/images/potato_icon.svg") no-repeat center 10px/70px; }
-  .crop_plant_modal_body .crop_plant_content .onion_crop_tile {
-    background: url("/assets/images/onion_icon.svg") no-repeat center 10px/50px; }
-  .crop_plant_modal_body .crop_plant_content .carrot_crop_tile {
-    background: url("/assets/images/carrot_icon.svg") no-repeat center 10px/22px; }
-  .crop_plant_modal_body .crop_plant_content .corn_crop_tile {
-    background: url("/assets/images/corn_icon.svg") no-repeat center 10px/43px; }
+      margin-top: 10px;
+      text-align: center;
+      width: 100%; }
+  .crop_plant_modal_body .crop_plant_content .tile_radio_btn input.crop_option {
+    background-color: red !important; }
   .crop_plant_modal_body .crop_to_plant_btn_group {
     display: flex;
     text-align: center;
@@ -133,6 +148,8 @@ header {
       color: #fff;
       border: none;
       border-radius: 5px; }
+      .crop_plant_modal_body .crop_to_plant_btn_group button:focus {
+        outline: none; }
     .crop_plant_modal_body .crop_to_plant_btn_group .crop_to_plant_cancel_btn {
       background-color: #828282; }
     .crop_plant_modal_body .crop_to_plant_btn_group .crop_to_plant_btn {

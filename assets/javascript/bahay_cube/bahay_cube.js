@@ -1,7 +1,8 @@
 var tiles = [];
 var tile_id;
 var popover_content = '';
-var total_earinings = 0;
+var total_earnings = 100;
+var selected_plant = "potato";
 
 $(document).ready(function () {
     displayTiles(16);
@@ -13,12 +14,12 @@ $(document).ready(function () {
         .on("click", ".has_plant", showTilePopover)                                 /** This function will show popups */
         .on("click", ".till_btn", setTilledState)                                   /** This function will set the tile in tilled state */
         .on("click", ".plant_btn", openCropToPlantModal)                            /** This function will open crop to plant modal */
-        .on("dblclick", ".has_plant", setHarvestState)                              /** This function will set the tile in harvest state */
-        // .on("click", ".plant_btn",openCropToPlantModal )
+        //.on("dblclick", ".has_plant", setHarvestState)                              /** This function will set the tile in harvest state */
+        .on("click", ".crop_to_plant_btn",submitSelectedCrop)
         .on("click", ".remove_btn", openRemoveModal)                                /** This function will open remove modal */
         .on("click", ".harvest_btn", harvestTile)                                   /** This function will harvest the plant and will add the crop value to total earnings */
         .on("click", ".remove_modal_remove_btn", removePlantState)                  /** This function will remove any state then set the tile to empty */
-        .on("click", ".plant", selectCropToPlant)
+        .on("click", ".tile_radio_btn", selectCropToPlant)
         .on("click", hidePopover);                                                  /** This function will hide other popovers in page */
     
     $('[data-toggle="popover"]').popover({
@@ -29,10 +30,60 @@ $(document).ready(function () {
 });
 
 function selectCropToPlant(){
-    let crop_plant_tile = $(this);
+    let crop_plant_tile = $(this)[0];
+    selected_plant = crop_plant_tile.id.split("_")[0];
+}
+
+function submitSelectedCrop(){
+    let tile_index = tile_id.split("id_")[1];
+    let plant = new Plant(selected_plant);
+    let this_tile = tiles[tile_index];
     
-    //crop_plant_tile.css("background", "")
     
+    if(selected_plant === "potato") {
+        plant.setHarvestTime(5);
+        plant.setValue(10)
+        plant.setHarvestValue(15);
+        plant.setCropImage("url('/assets/images/potato_icon.svg') no-repeat center 10px / 70px");
+    }
+    if(selected_plant === "onion") {
+        plant.setHarvestTime(8);
+        plant.setValue(15)
+        plant.setHarvestValue(25);
+        plant.setCropImage("url('/assets/images/onion_icon.svg') no-repeat center 10px / 50px");
+    }
+    if(selected_plant === "carrot") {
+        plant.setHarvestTime(10);
+        plant.setValue(25)
+        plant.setHarvestValue(75);
+        plant.setCropImage("url('/assets/images/carrot_icon.svg') no-repeat center 10px / 22px");
+    }
+    if(selected_plant === "corn") {
+        plant.setHarvestTime(12);
+        plant.setValue(35)
+        plant.setHarvestValue(100);
+        plant.setCropImage("url('/assets/images/corn_icon.svg') no-repeat center 10px / 43px");
+    }
+    
+    this_tile.setTileStatus('has_plant');
+    this_tile.setPlant(plant);
+    let crop_value = this_tile.plant["value"];
+
+    if(total_earnings > crop_value) {
+        total_earnings -= crop_value;
+        $('.total_earnings_value').text(total_earnings);
+    }
+    else {
+        alert("Not enough funds");
+        return;
+    }
+
+    if(this_tile.tile_status === "has_plant"){
+        let tile = $(`#${tile_id}`);
+        let time = this_tile.plant['harvest_time'];
+        tile.removeClass("tilled").addClass("has_plant").addClass(`${this_tile.plant['crop']}_planted`).find(".tile_text").text(`${time}s`);
+        harvestTime(time, tile_id, this_tile);
+    }
 }
 
 /** 
@@ -62,10 +113,15 @@ function setTilledState(){
     
     $(`#${tile_id}`).removeClass("empty").addClass("tilled");
     tiles[tile_index].setTileStatus("tilled");
-
-    console.log(tiles[tile_index])
 }
 
+/** 
+    * DOCU: This function will open the select crop modal<br>
+    * Triggered By: .on("click", ".empty", showPopover) <br>
+    * Last Updated Date: Sept. 19, 2022
+    * @function
+    * @author Alfie Osayan
+*/
 function openCropToPlantModal(){
     $('#crops_modal').modal({
         backdrop: "static",
@@ -86,7 +142,7 @@ function setPlantState(){
     
     let timer = $(`#${tile_id}`).find(".tile_text").text().split("s")[0];
 
-    harvestTime(timer, tile_id);
+    //harvestTime(timer, tile_id);
     tiles[tile_index].setTileStatus("has_plant");
 }
 
@@ -127,22 +183,27 @@ function hidePopover(event){
     * @author Alfie Osayan
 */
 function harvestTile(){
-    let harvested_value = $(".tile_text").text();
+    let this_tile = tile_id.split("id_")[1];
+    let harvested_value = tiles[this_tile].plant["harvest_value"];
 
-    total_earinings += parseInt(harvested_value.split("$")[1]);
+    total_earnings += harvested_value;
+    $('.total_earnings_value').text(total_earnings);
     removePlantState();
-    $('.total_earnings_value').text(total_earinings);
 }
 
 /** 
     * DOCU: This function will remove any state then set the tile to empty <br>
     * Triggered By: .on("click", ".remove_modal_remove_btn", removePlantState) <br>
-    * Last Updated Date: Sept. 9, 2022
+    * Last Updated Date: Sept. 19, 2022
     * @function
     * @author Alfie Osayan
 */
 function removePlantState(){
     let tile = $(`#${tile_id}`);
+    let selected_tile = tile_id.split("id_")[1];
+    console.log(tiles[selected_tile]);
+    tiles[selected_tile].setTileStatus("empty");
+    tiles[selected_tile].setPlant({});
     tile.removeClass().addClass("empty").find(".tile_text").text("");
 }
 
@@ -201,7 +262,7 @@ function displayTiles(number_of_tile){
     tile_block += "\n</div>";
 
     $("#tiles_table").html(tile_block);
-    $('.total_earnings_value').text(total_earinings);
+    $('.total_earnings_value').text(total_earnings);
 }
 
 /** 
@@ -210,16 +271,19 @@ function displayTiles(number_of_tile){
     * @function
     * @author Alfie Osayan
 */
-function harvestTime(time, tile) {
-    let timer = setInterval(function() {
+function harvestTime(time, tile, this_tile) {
+    let timer = setTimeout(function tick(){
         time--;
-        if($(`#${tile}`).hasClass("empty") === false) {
-            $(`#${tile}`).find(".tile_text").text(`${time}s`);
-        }
-        if (time <= 0) {
-            clearInterval(timer);
+        if(time <= 0) {
+            clearTimeout(timer);
             if ($(`#${tile}`).hasClass("empty") === false) {
-                $(`#${tile}`).removeClass("has_plant").addClass("harvest").find(".tile_text").text("$10");
+                $(`#${tile}`).removeClass("has_plant").addClass("harvest").find(".tile_text").text(`$${this_tile.plant["harvest_value"]}`);
+            }
+        }
+        else {
+            timer = setTimeout(tick, 1000);
+            if($(`#${tile}`).hasClass("empty") === false) {
+                $(`#${tile}`).find(".tile_text").text(`${time}s`);
             }
         }
     }, 1000);

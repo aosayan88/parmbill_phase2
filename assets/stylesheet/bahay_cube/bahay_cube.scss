@@ -47,25 +47,43 @@ header {
                     display: inline-block;
                     font: 14px/14px "Public Sans";
                     font-weight: 400;
+                    margin-top: 10px;
                 }
             }
         
             .empty {
-                background-color: #828282;
+                background-color: #828282 !important;
+                background: none;
             }
         
             .tilled {
-                background-color: #f2994a;
+                background-color: #f2994a !important;
             }
 
             .has_plant {
-                background: url("/assets/images/potato_icon.svg") no-repeat center 5px / 70px;
-                background-color: #f2c94c;
+                //background: url("/assets/images/potato_icon.svg") no-repeat center 5px / 70px;
+                background-color: #f2c94c !important;
             }
 
             .harvest {
-                background: url("/assets/images/potato_icon.svg") no-repeat center 5px / 70px;
-                background-color: #219653;
+                //background: url("/assets/images/potato_icon.svg") no-repeat center 5px / 70px;
+                background-color: #219653 !important;
+            }
+
+            .potato_planted {
+                background: url('/assets/images/potato_icon.svg') no-repeat center 10px / 70px;
+            }
+
+            .onion_planted {
+                background: url('/assets/images/onion_icon.svg') no-repeat center 10px / 50px;
+            }
+
+            .carrot_planted {
+                background: url('/assets/images/carrot_icon.svg') no-repeat center 10px / 22px;
+            }
+
+            .corn_planted {
+                background: url('/assets/images/corn_icon.svg') no-repeat center 10px / 43px;
             }
         }
 
@@ -139,43 +157,56 @@ header {
             justify-content: space-between;
         }
 
-        .crop_tile button {
-            background-color: #E0E0E0;
+        input[type="radio"] {
+            display: none;
+
+            &:checked + .tile_radio_btn {
+                background-color: #f2c94c !important;
+            }
+        }
+
+        .tile_radio_btn {
+            align-items: center;
+            background-color: #E0E0E0 !important;
             border: none;
             border-radius: 10px;
-            display: inline-block;
+            display: flex;
             height: 100px;
             outline: none;
             padding-top: 50px;
             width: 100px;
+
+            
+
+            &#potato_crop {
+                background: url("/assets/images/potato_icon.svg") no-repeat center 10px / 70px;
+            }
+    
+            &#onion_crop{
+                background: url("/assets/images/onion_icon.svg") no-repeat center 10px / 50px;
+            }
+    
+            &#carrot_crop {
+                background: url("/assets/images/carrot_icon.svg") no-repeat center 10px / 22px;
+            }
+    
+            &#corn_crop {
+                background: url("/assets/images/corn_icon.svg") no-repeat center 10px / 43px;
+            }
 
             .tile_text {
                 color: #333333;
                 display: inline-block;
                 font: 12px/12px "Public Sans";
                 font-weight: 400;
-                margin-top: 20px;
+                margin-top: 10px;
+                text-align: center;
+                width: 100%;
             }
         }
 
-        button {
-            margin-top: 20px;
-        }
-
-        .potato_crop_tile {
-            background: url("/assets/images/potato_icon.svg") no-repeat center 10px / 70px;
-        }
-
-        .onion_crop_tile {
-            background: url("/assets/images/onion_icon.svg") no-repeat center 10px / 50px;
-        }
-
-        .carrot_crop_tile {
-            background: url("/assets/images/carrot_icon.svg") no-repeat center 10px / 22px;
-        }
-
-        .corn_crop_tile {
-            background: url("/assets/images/corn_icon.svg") no-repeat center 10px / 43px;
+        .tile_radio_btn input.crop_option {
+            background-color: red !important;
         }
     }
 
@@ -193,6 +224,10 @@ header {
             color: #fff;
             border: none;
             border-radius: 5px;
+
+            &:focus {
+                outline: none;
+            }
         }
 
         .crop_to_plant_cancel_btn {

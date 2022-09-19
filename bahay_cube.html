@@ -47,10 +47,22 @@
                     <p class="crop_plant_header">Select a Crop to Plant</p>
                     <div class="crop_plant_content">
                         <div class="crop_tile">
-                            <button type="button" class="potato_crop_tile"><span class="tile_text">60s / 10$ / 15$</span></button>
-                            <button type="button" class="onion_crop_tile"><span class="tile_text">80s / 15$ / 25$</span></button>
-                            <button type="button" class="carrot_crop_tile"><span class="tile_text">120s / 25$ / 75$</span></button>
-                            <button type="button" class="corn_crop_tile"><span class="tile_text">180s / 35$ / 100$</span></button>
+                            <input type="radio" id="potato_crop" name="crop_option" value="potato" checked="checked">
+                            <label for="potato_crop" id="potato_crop" class="tile_radio_btn">
+                                <span class="tile_text">60s / 10$ / 15$</span>
+                            </label>
+                            <input type="radio" id="onion_crop" name="crop_option" value="onion">
+                            <label for="onion_crop" id="onion_crop" class="tile_radio_btn">
+                                <span class="tile_text">80s / 15$ / 25$</span>
+                            </label>
+                            <input type="radio" id="carrot_crop" name="crop_option" value="carrot">
+                            <label for="carrot_crop" id="carrot_crop" class="tile_radio_btn">
+                                <span class="tile_text">120s/25$/75$</span>
+                            </label>
+                            <input type="radio" id="corn_crop" name="crop_option" value="corn">
+                            <label for="corn_crop" id="corn_crop" class="tile_radio_btn">
+                                <span class="tile_text">180s / 35$ /100$</span>
+                            </label>
                         </div>
                     </div>
                     <div class="crop_to_plant_btn_group">
