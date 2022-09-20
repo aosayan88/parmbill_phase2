@@ -160,8 +160,10 @@ header {
         input[type="radio"] {
             display: none;
 
-            &:checked + .tile_radio_btn {
-                background-color: #f2c94c !important;
+            &:checked {
+                + .tile_radio_btn {
+                    background-color: #f2c94c !important;
+                }
             }
         }
 
