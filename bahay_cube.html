@@ -31,8 +31,8 @@
                 <p class="remove_plant_header">Remove Plant</p>
                 <p>Are you sure you want to remove this plant?</p>
                 <div class="remove_modal_btn_group">
-                    <button class="remove_modal_cancel_btn" data-dismiss="modal">Cancel</button>
-                    <button class="remove_modal_remove_btn" data-dismiss="modal">Remove</button>
+                    <button type="button" class="remove_modal_cancel_btn" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="remove_modal_remove_btn" data-dismiss="modal">Remove</button>
                 </div>
             </div>
         </div>
@@ -49,25 +49,25 @@
                         <div class="crop_tile">
                             <input type="radio" id="potato_crop" name="crop_option" value="potato" checked="checked">
                             <label for="potato_crop" id="potato_crop" class="tile_radio_btn">
-                                <span class="tile_text">60s / 10$ / 15$</span>
+                                <span class="tile_text">5s / 10$ / 15$</span>
                             </label>
                             <input type="radio" id="onion_crop" name="crop_option" value="onion">
                             <label for="onion_crop" id="onion_crop" class="tile_radio_btn">
-                                <span class="tile_text">80s / 15$ / 25$</span>
+                                <span class="tile_text">8s / 15$ / 25$</span>
                             </label>
                             <input type="radio" id="carrot_crop" name="crop_option" value="carrot">
                             <label for="carrot_crop" id="carrot_crop" class="tile_radio_btn">
-                                <span class="tile_text">120s/25$/75$</span>
+                                <span class="tile_text">10s/25$/75$</span>
                             </label>
                             <input type="radio" id="corn_crop" name="crop_option" value="corn">
                             <label for="corn_crop" id="corn_crop" class="tile_radio_btn">
-                                <span class="tile_text">180s / 35$ /100$</span>
+                                <span class="tile_text">12s / 35$ /100$</span>
                             </label>
                         </div>
                     </div>
                     <div class="crop_to_plant_btn_group">
                         <button type="button"  class="crop_to_plant_cancel_btn" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="crop_to_plant_btn" data-dismiss="modal">Plant</button>
+                        <button type="submit" id="crop_to_plant_btn" data-dismiss="modal">Plant</button>
                     </div>
                 </form>
             </div>

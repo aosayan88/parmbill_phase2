@@ -152,11 +152,11 @@ header {
         outline: none; }
     .crop_plant_modal_body .crop_to_plant_btn_group .crop_to_plant_cancel_btn {
       background-color: #828282; }
-    .crop_plant_modal_body .crop_to_plant_btn_group .crop_to_plant_btn {
+    .crop_plant_modal_body .crop_to_plant_btn_group #crop_to_plant_btn {
       background-color: #2f80ed; }
 
 .remove_btn,
-.harvest_btn,
+#harvest_btn,
 .plant_btn,
 .till_btn {
   background-color: #2F80ED;
@@ -170,12 +170,12 @@ header {
   outline: none;
   width: 100px; }
   .remove_btn:focus,
-  .harvest_btn:focus,
+  #harvest_btn:focus,
   .plant_btn:focus,
   .till_btn:focus {
     outline: none; }
 
-.harvest_btn {
+#harvest_btn {
   margin-bottom: 10px; }
 
 .remove_btn {

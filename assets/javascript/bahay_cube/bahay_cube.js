@@ -14,9 +14,9 @@ $(document).ready(function () {
         .on("click", ".has_plant", showTilePopover)                                 /** This function will show popups */
         .on("click", ".till_btn", setTilledState)                                   /** This function will set the tile in tilled state */
         .on("click", ".plant_btn", openCropToPlantModal)                            /** This function will open crop to plant modal */
-        .on("click", ".crop_to_plant_btn",submitSelectedCrop)
+        .on("click", "#crop_to_plant_btn",submitSelectedCrop)
         .on("click", ".remove_btn", openRemoveModal)                                /** This function will open remove modal */
-        .on("click", ".harvest_btn", harvestTile)                                   /** This function will harvest the plant and will add the crop value to total earnings */
+        .on("click", "#harvest_btn", harvestTile)                                   /** This function will harvest the plant and will add the crop value to total earnings */
         .on("click", ".remove_modal_remove_btn", removePlantState)                  /** This function will remove any state then set the tile to empty */
         .on("click", hidePopover);                                                  /** This function will hide other popovers in page */
     
@@ -54,6 +54,8 @@ function submitSelectedCrop(){
         tile.removeClass("tilled").addClass("has_plant").addClass(`${this_tile.plant['crop']}_planted`).find(".tile_text").text(`${time}s`);
         harvestTime(time, tile_id, this_tile);
     }
+
+    $('#crops_modal').modal('hide');
 }
 
 /** 
@@ -236,7 +238,7 @@ function popOverButton(){
     }
     else if ($(this).hasClass("harvest")) {
         return (
-            '<button class="harvest_btn">Harvest</button> <button class="remove_btn">Remove</button>'
+            '<button id="harvest_btn">Harvest</button> <button class="remove_btn">Remove</button>'
         );
     }
     else {

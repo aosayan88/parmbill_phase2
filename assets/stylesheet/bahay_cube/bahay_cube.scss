@@ -236,14 +236,14 @@ header {
             background-color: #828282;
         }
 
-        .crop_to_plant_btn {
+        #crop_to_plant_btn {
             background-color: #2f80ed;
         }
     }
 }
 
 .remove_btn,
-.harvest_btn,
+#harvest_btn,
 .plant_btn,
 .till_btn {
     background-color: #2F80ED;
@@ -263,7 +263,7 @@ header {
 }
 
 
-.harvest_btn {
+#harvest_btn {
     margin-bottom: 10px;
 }
 
